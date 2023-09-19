@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+
+    <title>Gestão de Parcerias</title>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Cabeçalho de informações do sistema -->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="d-flex flex-column align-items-center">
+                    <img src="img/welcome.jpg" class="img-fluid mx-auto" style="max-height: 70vh;"
+                        alt="Banner de bem vindos">
+                    <div class="title">
+                        <h2>Cadastro de Empresas Privadas e Prefeituras</h2>
+                    </div>
+                    <!-- Opções para adicionar uma nova empresa -->
+                    <form id="formEmpresa" class="needs-validation">
+                        <div class="row">
+                            <div class="col-1">
+                                <div class='form-group'>
+                                    <label for='id'>id</label>
+                                    <input id='id' type='text' class='form-control' name='id' disabled />
+                                </div>
+                                <div class="invalid-feedback">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class='row'>
+                            <div class='col-12 col-sm-12 col-md-6 col-lg-3'>
+                                <div class='form-group'>
+                                    <label for='cnpj'>cnpj*</label>
+                                    <input id='cnpj' type='text' maxLength="14" class='form-control' name='cnpj'
+                                        placeholder='Digite o cnpj' required onchange="getCNPJ()" />
+                                </div>
+                                <div class="invalid-feedback">
+
+                                </div>
+                            </div>
+                            <div class='col-12 col-sm-12 col-md-6 col-lg-3'>
+                                <div class='form-group'>
+                                    <label for='nome'>Nome*</label>
+                                    <input id='nome' type='text' class='form-control' name='nome'
+                                        placeholder='Digite o nome' required />
+                                </div>
+                                <div class="invalid-feedback">
+
+                                </div>
+                            </div>
+                            <div class='col-12 col-sm-12 col-md-6 col-lg-3'>
+                                <div class='form-group'>
+                                    <label for='email'>email*</label>
+                                    <input id='email' type='email' class='form-control' name='email'
+                                        placeholder='Digite o e-mail' required />
+                                </div>
+                                <div class="invalid-feedback">
+
+                                </div>
+                            </div>
+                            <div class='col-12 col-sm-12 col-md-6 col-lg-3'>
+                                <div class='form-group'>
+                                    <label for='resposanvel'>resposnavel*</label>
+                                    <input id='resposanvel' type='text' class='form-control' name='responsavel'
+                                        placeholder='Digite o resposável' required />
+                                </div>
+                                <div class="invalid-feedback">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class='row'>
+                            <div class='col-12 col-sm-12 col-md-6 col-lg-3'>
+                                <div class='form-group'>
+                                    <label for='tipoEmpresa'>Tipo Empresa</label>
+                                    <select id='tipoEmpresa' class='form-control' name='tipoEmpresa' required>
+                                        <option selected value="1">Privado</option>
+                                        <option value="2">Prefeitura</option>
+                                    </select>
+                                </div>
+                                <div class="invalid-feedback">
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <button id="btnIncluirEmpresa" type="submit"
+                            class="btn btn-success mt-3 mb-3">Adicionar</button>
+                        <button style="display: none;" id="btnEditarEmpresa" type="submit"
+                            class="btn btn-primary mt-3 mb-3">Editar</button>
+                        &nbsp;&nbsp;
+                        <button onclick="cancelEmpresa()" type="reset"
+                            class="btn btn-danger mt-3 mb-3">Cancelar</button>
+                    </form>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <h2>Lista de Privados e Prefeituras</h2>
+                        </div>
+                    </div>
+
+                    <!-- Tabela com Empresas existentes -->
+                    <section class="row">
+                        <table id="myTableEmpresa" class="table table-striped ">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>id</th>
+                                    <th>Nome</th>
+                                    <th>cnpj</th>
+                                    <th>E-mail</th>
+                                    <th>Responsável</th>
+                                    <th>Tipo Empresa</th>
+                                    <th>Ações
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbCorpoEmpresa">
+
+                            </tbody>
+                        </table>
+                    </section>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <h2>Matches Entre Privados e Prefeituras</h2>
+                        </div>
+                    </div>
+
+
+                    <!-- Tabela com Matches existentes -->
+                    <section class="row">
+                        <table id="myTableMatches" class="table table-striped ">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>Nome Privado</th>
+                                    <th>cnpj</th>
+                                    <th>Tipo Empresa</th>
+                                    <th>Área de Intenção Privada</th>
+                                    <th>Nome Prefeitura</th>
+                                    <th>cnpj</th>
+                                    <th>Tipo Empresa</th>
+                                    <th>Área de Intenção Prefeitura</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbCorpoMatch">
+
+                            </tbody>
+                        </table>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="areaIntencao" data-backdrop="static" data-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <section class="row">
+                        <table id="myTableArea" class="table table-striped ">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>id</th>
+                                    <th>descrição</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbCorpoArea">
+
+                            </tbody>
+                        </table>
+                    </section>
+
+                    <form id="formArea">
+                        <div class="row">
+                            <div class="col-1">
+                                <div class='form-group'>
+                                    <label for='empresaId'>id</label>
+                                    <input id='empresaId' type='text' class='form-control' name='empresaId' readonly />
+                                </div>
+                            </div>
+
+                            <div class='col-11 col-sm-11 col-md-11 col-lg-11'>
+                                <div class='form-group'>
+                                    <label for='areaIntencaoId'>Áreas de Intenções</label>
+                                    <select id='areaIntencaoId' class='form-control' name='areaIntencaoId' required>
+                                        <option selected value=""></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-success">Save</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+        crossorigin="anonymous"></script>
+
+    <script src="scripts.js"></script>
+</body>
+
+</html>
