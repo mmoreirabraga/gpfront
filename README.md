@@ -1,13 +1,42 @@
-# Front Gestão de Parcerias
- 
-Este pequeno projeto faz parte de um projeto maior(para mais detalhes entre em contato comigo) que foi desenvolvido por mim durante 1 ano e que esta em fase de teste
+# MVP SPRING PUC-RIO - Desenvolvimento Back-end Avançado
 
-## Quais tecnologias e framerworks foram utilizados 
+Esse repositorio contém o frontend do terceiro MVP para a pós-graduação em desenvolvimento Full Stack.
+Nesse projeto criei uma aplicação que possibilita conectar prefeituras e empresas privadas para
+possiveis parcerias públicas e privadas as PPPs
 
-Framework bootstrap 4.6 e jQuery.
+## Quais tecnologias e framerworks foram utilizados
+
+Framework bootstrap 4.6.
 html, css, javascript
 
 ---
+
+## Arquitetura
+
+Foram utilizados três componentes denominados A, B e C. Sendo que:
+
+<img src="/img/DiagramaAplicacao.jpg">
+
+**Componente A**: FRONT-END da aplicação deenvolvido em HTML, CSS e Java Script.
+
+**Componente B**: API do [CNPJ.ws](https://www.cnpj.ws/) para buscar pessoas juridicas na hora de buscar uma prefeitura ou empresa privada.
+
+**Componente C**: BACK-END da aplicação desenvolvida em FAST-API. O código está presente [respositório](https://github.com/mmoreirabraga/gpapi)
+
+## Como instalar
+
+Clone o repositório localmente.
+
+Dentro do repositório local, realize o build da imagem do docker com o seguinte comando:
+
+```bash
+    docker build -t gpfront:1.0.0 .
+```
+
 ## Como executar
 
-Basta fazer o download do projeto e abrir o arquivo index.html no seu browser.
+Após completar o build da imagem do docker, execute-o o seguinte comando:
+
+```bash
+    docker run -p 8080:80 gpfront:1.0.0
+```
