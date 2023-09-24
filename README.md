@@ -19,7 +19,7 @@ Foram utilizados três componentes denominados A, B e C. Sendo que:
 
 **Componente A**: FRONT-END da aplicação deenvolvido em HTML, CSS e Java Script.
 
-**Componente B**: API do [CNPJ.ws](https://www.cnpj.ws/) para buscar pessoas juridicas na hora de buscar uma prefeitura ou empresa privada.
+**Componente B**: API do [CNPJ.ws](https://www.cnpj.ws/) para buscar pessoas juridicas na hora de buscar uma prefeitura ou empresa privada. OBS: A API Pública possui a limitação de atender apenas 3 requisições por minuto de um mesmo IP, entenda que essa limitação é independente ao fato de a consulta ter obtido sucesso ao encontrar o CNPJ. Após ultrapassar esse limite o requisitante terá que aguardar completar os 60 segundos para poder fazer a próxima requisição.
 
 **Componente C**: BACK-END da aplicação desenvolvida em FAST-API. O código está presente [respositório](https://github.com/mmoreirabraga/gpapi)
 
